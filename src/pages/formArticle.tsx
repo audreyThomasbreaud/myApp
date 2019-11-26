@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Princessee from '../pics/Princessee.png';
@@ -35,9 +35,17 @@ const useStyles = makeStyles(theme => ({
         position: "relative", 
         marginBottom: theme.spacing(8),
         marginTop: theme.spacing(15),
-        color:'#f8bbd0',
+        color:'#d81b60',
         fontSize:72,
+    
     },
+    // inputfichier: {
+    //     marginBottom: theme.spacing(5),
+    //     display: 'flex',
+    //     flexDirection: 'column',
+    //     alignItems: 'center',
+    //     color:'#d81b60',
+    // },
     button: {
         marginBottom: theme.spacing(5),
         display: 'flex',
@@ -45,11 +53,20 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         color:'#d81b60',
     },
-    input: {
+    buttonun: {
+        marginBottom: theme.spacing(5),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        marginBottom: theme.spacing(8),
+        color:'#f48fb1',
+        backgroundColor:'#d81b60'
+    },
+    input: {
+        display: 'none',
+        // flexDirection: 'column',
+        // alignItems: 'center',
+        // marginBottom: theme.spacing(8),
+        // color:'#d81b60'
     },
     blur: {
         height:"550px",
@@ -65,10 +82,42 @@ const useStyles = makeStyles(theme => ({
         overflow:"hidden",
         marginLeft:"65%"
     },
+   
+    
 })
 );
 
-export default function FormArticle() {
+const FormArticle = () => {
+    const [hasError, setErrors] = useState(false);
+    const [articles, setArticles] = useState([]);
+
+
+async function FormArticle() {
+    return fetch (`http://127.0.0.1:3000/articles/id`,
+    {
+        method: 'GET',
+        cache: 'default',
+    })
+  }
+
+  useEffect(() => {
+    FormArticle()
+.then(res => res.json())
+.then((res) => {
+   console.log(res)
+  setArticles(res);
+    });
+  }, []);
+
+
+
+
+
+
+
+
+
+
   const classes = useStyles();
 return (
     <Container component="main" maxWidth="xl">
@@ -80,10 +129,21 @@ return (
         <form className={classes.form} noValidate autoComplete ="off">
            <div className={classes.formu}>
 
+           <TextField
+                    id="outlined-required"
+                    label="identifiant :"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    color="secondary"
+                    InputProps={{
+                        readOnly: true,
+                      }}
+                />
+
                 <TextField
                     id="outlined-required"
                     label="titre de l'article :"
-                   
                     className={classes.textField}
                     margin="normal"
                     variant="outlined"
@@ -92,7 +152,6 @@ return (
                 <TextField
                     id="outlined-required"
                     label="auteur de l'article:"
-                    
                     className={classes.textField}
                     margin="normal"
                     variant="outlined"
@@ -103,17 +162,23 @@ return (
                      label="Votre article: "
                      multiline
                      rows="4"
-                   
                      className={classes.textField}
                      margin="normal"
                      variant="outlined"
                      color="secondary"
                 />
+                <input
+                    accept="image/*"
+                    className={classes.input}
+                    id="contained-button-file"
+                    multiple
+                    type="file"
+                />
                 <label htmlFor="contained-button-file">
-                    <Button variant="contained" component="span" className={classes.button}>
-                    telecharger votre image
-                    </Button>
-                </label>
+                 <Button variant="contained" color="secondary" component="span" className={classes.buttonun}>
+                 Télecharger votre image
+                </Button>
+      </label>
                 <Button variant="contained" href="#contained-buttons" className={classes.button}>
                     Envoyer
                 </Button>
@@ -123,3 +188,5 @@ return (
     </Container>
 ) ;
 }
+
+export default FormArticle;

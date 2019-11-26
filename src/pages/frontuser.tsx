@@ -2,6 +2,12 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Princessee from '../pics/Princessee.png';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@material-ui/core/Button';
+import UpdateIcon from '@material-ui/icons/Update';
+import ArticlesUser from '../component/listUser';
+
+
 
 const useStyles = makeStyles(theme => ({
     '@global': {
@@ -10,18 +16,39 @@ const useStyles = makeStyles(theme => ({
           backgroundPosition: "center center",
           backgroundSize: "cover",
           backgroundAttachment: "fixed",
-       },
-    },
+          position:'absolute',
+        },
+      },
+
+        titre: {
+          color:'#d81b60',
+          fontSize:62,
+          marginTop: theme.spacing(15),
+          position:'relative',
+          // marginLeft:'25%',
+      },
+
+      contenu:{
+        color:'#212121',
+        position:'relative',
+        marginLeft:'25%',
+        
+      }
+
 }));
+
 
 export default function FrontUser() {
   const classes = useStyles();
 
   return (
-      <Container component="main" maxWidth="xl">
+    <Container component="main" maxWidth="xl">
+      <div  className={classes.contenu}>
+        <h1 className={classes.titre}>BIENVENUE SUR CE BLOG:</h1>
+        <div><ArticlesUser/></div>
+      </div>
+    </Container>
+);}
 
 
 
-      </Container>
-);
-}
