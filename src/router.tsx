@@ -5,7 +5,6 @@ import SignIn from './pages/connect';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Princess from './pics/Princess.jpg';
 import Container from '@material-ui/core/Container';
 import Home from './pages/home';
 import Typography from '@material-ui/core/Typography';
@@ -14,13 +13,13 @@ import Button from '@material-ui/core/Button';
 // import {Articles} from './pages/AfficherListe';
 // import usePostArticleService from './component/list';
 import AfficherListe from './pages/AfficherListe';
+import FrontUser from './pages/frontuser';
 
 
 
 const useStyles = makeStyles(theme => ({
     '@global': {
         body: {
-          backgroundImage: `url(${Princess})`,
           backgroundPosition: "center center",
           backgroundSize: "cover",
           backgroundAttachment: "fixed",
@@ -78,6 +77,11 @@ const Router: React.FC=() => {
                 <Route exact path="/FormArticle">
                   <FormArticle/>
                 </Route>
+
+                <Route exact path="/FrontUser">
+                  <FrontUser/>
+                </Route>
+
                 </Switch>
           </BrowserRouter>
         </Container>

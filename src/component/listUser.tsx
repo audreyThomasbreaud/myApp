@@ -1,51 +1,42 @@
 import React, { Component,useState,useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Button from '@material-ui/core/Button';
-import UpdateIcon from '@material-ui/icons/Update';
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
-
-  pic: {
-    height:'15em',
-    marginRight:'4em',
-    width:'15em'
-  },
-
-
-button: {
-  color: '#f48fb1',
-  backgroundColor: '#d81b60',
+pic: {
+  height:'15em',
+  marginRight:'1em',
+  width:'15em'
 },
-buttonun: {
-  color: '#d81b60',
-  backgroundColor: '#f48fb1',
-  marginRight:'1em'
-  
-},
+
 parent:{
   display: 'flex',
-  width:'100%',
-  marginBottom:'2%',
+  // width:'100%',
+  // marginBottom:'2%',
   alignItems:'center',
   alignContent:'center'
 },
-bouton:{
-display:'flex',
-alignItems:'center',
-alignContent:'center',
-marginLeft:'5em',
+
+artitre:{
+  width:'50em',
+  color:'#d81b60',
+  alignItems:'center'
+},
+
+container:{
+  alignItems:'center',
+
 },
 
 article:{
   width:'50em',
-  color:'black',
+  color:'#212121',
   alignItems:'center'
 }
 }));
 
 
-const Articles = () => {
+const ArticlesUser = () => {
   const [hasError, setErrors] = useState(false);
   const [articles, setArticles] = useState([]);
   const classes = useStyles();
@@ -68,38 +59,26 @@ const Articles = () => {
   }, []);
 
   return (
+    <Container component="main" maxWidth="xl" className={classes.container}>
     <div>
       {articles &&
       articles.map((article: any) => (
         <div className={classes.parent} key={article.id}>
           <img className={classes.pic} src={article.pic}></img>
             <div>
-            <h1>{article.title}</h1>
+            <h1 className={classes.artitre}>{article.title}</h1>
             <p className={classes.article}>{article.content}</p>
             <p>{article.auteur}</p>
-            </div>
-            <div className={classes.bouton}>
-              <Button
-              color="secondary"
-              className={classes.buttonun}
-              startIcon={<UpdateIcon />}
-              href="/formArticle"
-              > Mettre à jour
-              </Button>
-              <Button
-              color="secondary"
-              className={classes.button}
-              startIcon={<DeleteIcon />}> Supprimer
-                </Button>
             </div>
         </div>
       ))}
       {hasError && <span> Has error: {hasError}</span>}
     </div>
+    </Container>
   );
 };
 
-export default Articles;
+export default ArticlesUser;
 
 
 
