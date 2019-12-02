@@ -1,6 +1,6 @@
 export default interface Article {
-    id: number,
-    titre: string,
+    id: string,
+    title: string,
     content: string,
     auteur: string,
     pic: string,

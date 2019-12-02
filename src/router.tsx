@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route,Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route,Link} from 'react-router-dom';
 import SignIn from './pages/connect';
  import FormArticle from './pages/formArticle';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,10 +10,10 @@ import Home from './pages/home';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 // import {PrivateRoute} from './component/protect';
-// import {Articles} from './pages/AfficherListe';
-// import usePostArticleService from './component/list';
 import AfficherListe from './pages/AfficherListe';
 import FrontUser from './pages/frontuser';
+import MajArticles from './component/majArticle';
+// import DeleteArticles from './component/delete';
 
 
 
@@ -55,6 +55,7 @@ const Router: React.FC=() => {
                     <Typography variant="h5" className={classes.title}><Link to ="/AfficherListe" className= {classes.Navlink}>Liste</Link></Typography>
                     <Typography variant="h5" className={classes.title}><Link to ="/FormArticle" className= {classes.Navlink}>Créer un article</Link></Typography>
                     <Typography variant="h5" className={classes.title}><Link to ="/FrontUser" className= {classes.Navlink}>Front User</Link></Typography>
+                    {/* <Typography variant="h5" className={classes.title}><Link to ="/MajArticle" className= {classes.Navlink}>Mise à jour</Link></Typography> */}
                     <Button color="inherit"><Link to ="/SignIn" className= {classes.Navlink}>Se connecter</Link></Button>
                   </Toolbar>
                 </AppBar>
@@ -81,11 +82,18 @@ const Router: React.FC=() => {
                 <Route exact path="/FrontUser">
                   <FrontUser/>
                 </Route>
+                <Route exact path="/DeleteArticles">
+                    {/* <DeleteArticles/> */}
+                </Route>
+                <Route path="/MajArticle/:id">
+                    <MajArticles/>
+                </Route>
 
                 </Switch>
           </BrowserRouter>
         </Container>
     );
 }
+
 
 export default Router;

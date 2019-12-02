@@ -39,13 +39,6 @@ const useStyles = makeStyles(theme => ({
         fontSize:72,
     
     },
-    // inputfichier: {
-    //     marginBottom: theme.spacing(5),
-    //     display: 'flex',
-    //     flexDirection: 'column',
-    //     alignItems: 'center',
-    //     color:'#d81b60',
-    // },
     button: {
         marginBottom: theme.spacing(5),
         display: 'flex',
@@ -63,11 +56,8 @@ const useStyles = makeStyles(theme => ({
     },
     input: {
         display: 'none',
-        // flexDirection: 'column',
-        // alignItems: 'center',
-        // marginBottom: theme.spacing(8),
-        // color:'#d81b60'
     },
+
     blur: {
         height:"550px",
         width:"1100px",
@@ -82,32 +72,30 @@ const useStyles = makeStyles(theme => ({
         overflow:"hidden",
         marginLeft:"65%"
     },
-   
-    
 })
 );
 
 const FormArticle = () => {
-    const [hasError, setErrors] = useState(false);
-    const [articles, setArticles] = useState([]);
+    // const [hasError, setErrors] = useState(false);
+    const [setArticles] = useState([]);
 
 
 async function FormArticle() {
     return fetch (`http://127.0.0.1:3000/articles/id`,
     {
-        method: 'GET',
+        method: 'POST',
         cache: 'default',
     })
   }
 
-  useEffect(() => {
-    FormArticle()
-.then(res => res.json())
-.then((res) => {
-   console.log(res)
-  setArticles(res);
-    });
-  }, []);
+//   useEffect(() => {
+//     FormArticle()
+// .then(res => res.json())
+// .then((res) => {
+//    console.log(res)
+//   setArticles(res);
+//     });
+//   }, []);
 
 
 
@@ -120,73 +108,75 @@ async function FormArticle() {
 
   const classes = useStyles();
 return (
-    <Container component="main" maxWidth="xl">
-        <h1 className={classes.titre}>CREER UN ARTICLE : </h1>
+    <p>le</p>
+    // <Container component="main" maxWidth="xl">
+    //     <h1 className={classes.titre}>CREER UN ARTICLE : </h1>
 
-        <div className={classes.blur}>
-        </div>
-        <div>
-        <form className={classes.form} noValidate autoComplete ="off">
-           <div className={classes.formu}>
+    //     <div className={classes.blur}>
+    //     </div>
+    //     <div>
+    //     <form className={classes.form} noValidate autoComplete ="off" method="POST" action="">
+    //        <div className={classes.formu}>
 
-           <TextField
-                    id="outlined-required"
-                    label="identifiant :"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    color="secondary"
-                    InputProps={{
-                        readOnly: true,
-                      }}
-                />
+    //        <TextField
+    //                 id="outlined-required"
+    //                 label="identifiant :"
+    //                 className={classes.textField}
+    //                 margin="normal"
+    //                 variant="outlined"
+    //                 color="secondary"
+    //                 InputProps={{
+    //                     readOnly: true,
+    //                   }}
+    //             />
 
-                <TextField
-                    id="outlined-required"
-                    label="titre de l'article :"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    color="secondary"
-                />
-                <TextField
-                    id="outlined-required"
-                    label="auteur de l'article:"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    color="secondary"
-                />
-                 <TextField
-                     id="outlined-multiline-static"
-                     label="Votre article: "
-                     multiline
-                     rows="4"
-                     className={classes.textField}
-                     margin="normal"
-                     variant="outlined"
-                     color="secondary"
-                />
-                <input
-                    accept="image/*"
-                    className={classes.input}
-                    id="contained-button-file"
-                    multiple
-                    type="file"
-                />
-                <label htmlFor="contained-button-file">
-                 <Button variant="contained" color="secondary" component="span" className={classes.buttonun}>
-                 Télecharger votre image
-                </Button>
-      </label>
-                <Button variant="contained" href="#contained-buttons" className={classes.button}>
-                    Envoyer
-                </Button>
-            </div>
-        </form>
-        </div>
-    </Container>
-) ;
+    //             <TextField
+    //                 id="outlined-required"
+    //                 label="titre de l'article :"
+    //                 className={classes.textField}
+    //                 margin="normal"
+    //                 variant="outlined"
+    //                 color="secondary"
+    //                 // InputLabelProps={{articles.content}}
+    //             />
+    //             <TextField
+    //                 id="outlined-required"
+    //                 label="auteur de l'article:"
+    //                 className={classes.textField}
+    //                 margin="normal"
+    //                 variant="outlined"
+    //                 color="secondary"
+    //             />
+    //              <TextField
+    //                  id="outlined-multiline-static"
+    //                  label="Votre article: "
+    //                  multiline
+    //                  rows="4"
+    //                  className={classes.textField}
+    //                  margin="normal"
+    //                  variant="outlined"
+    //                  color="secondary"
+    //             />
+    //             <input
+    //                 accept="image/*"
+    //                 className={classes.input}
+    //                 id="contained-button-file"
+    //                 multiple
+    //                 type="file"
+    //             />
+    //             <label htmlFor="contained-button-file">
+    //              <Button variant="contained" color="secondary" component="span" className={classes.buttonun}>
+    //              Télecharger votre image
+    //             </Button>
+    //   </label>
+    //             <Button type="submit" variant="contained" href="#contained-buttons" className={classes.button}>
+    //                 Envoyer
+    //             </Button>
+    //         </div>
+    //     </form>
+    //     </div>
+    // </Container>
+) 
 }
 
 export default FormArticle;

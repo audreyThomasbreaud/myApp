@@ -1,6 +1,5 @@
 import React from 'react';
 import Switch from '@material-ui/core/Switch';
-import Paper from '@material-ui/core/Paper';
 import Zoom from '@material-ui/core/Zoom';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';

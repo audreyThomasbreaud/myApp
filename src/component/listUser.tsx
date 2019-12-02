@@ -1,4 +1,4 @@
-import React, { Component,useState,useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 
@@ -11,8 +11,6 @@ pic: {
 
 parent:{
   display: 'flex',
-  // width:'100%',
-  // marginBottom:'2%',
   alignItems:'center',
   alignContent:'center'
 },
@@ -37,7 +35,8 @@ article:{
 
 
 const ArticlesUser = () => {
-  const [hasError, setErrors] = useState(false);
+  const [hasError
+  ] = useState(false);
   const [articles, setArticles] = useState([]);
   const classes = useStyles();
 
@@ -64,7 +63,7 @@ const ArticlesUser = () => {
       {articles &&
       articles.map((article: any) => (
         <div className={classes.parent} key={article.id}>
-          <img className={classes.pic} src={article.pic}></img>
+          <img className={classes.pic} src={article.pic} alt="pic"></img>
             <div>
             <h1 className={classes.artitre}>{article.title}</h1>
             <p className={classes.article}>{article.content}</p>

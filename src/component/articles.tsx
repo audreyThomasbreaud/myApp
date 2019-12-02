@@ -1,4 +1,4 @@
-import React, { Component,useState,useEffect } from 'react';
+import React, {useState,useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
@@ -46,7 +46,7 @@ article:{
 
 
 const Articles = () => {
-  const [hasError, setErrors] = useState(false);
+  const [hasError] = useState(false);
   const [articles, setArticles] = useState([]);
   const classes = useStyles();
 
@@ -72,24 +72,28 @@ const Articles = () => {
       {articles &&
       articles.map((article: any) => (
         <div className={classes.parent} key={article.id}>
-          <img className={classes.pic} src={article.pic}></img>
+          <img className={classes.pic} src={article.pic} alt=" "></img>
             <div>
             <h1>{article.title}</h1>
             <p className={classes.article}>{article.content}</p>
             <p>{article.auteur}</p>
             </div>
             <div className={classes.bouton}>
+
               <Button
               color="secondary"
               className={classes.buttonun}
               startIcon={<UpdateIcon />}
-              href="/formArticle"
+              href= {"/MajArticle/"+article.id}
+              value={article.id}
               > Mettre à jour
               </Button>
+
               <Button
               color="secondary"
               className={classes.button}
-              startIcon={<DeleteIcon />}> Supprimer
+              startIcon={<DeleteIcon />}
+              href='/deleteArticle'> Supprimer
                 </Button>
             </div>
         </div>

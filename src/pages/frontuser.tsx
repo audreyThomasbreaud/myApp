@@ -2,9 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Princessee from '../pics/Princessee.png';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Button from '@material-ui/core/Button';
-import UpdateIcon from '@material-ui/icons/Update';
 import ArticlesUser from '../component/listUser';
 
 
