@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, TextField, Button } from "@material-ui/core";
+import { Container, Button } from "@material-ui/core";
 import Princessee from "../pics/Princessee.png";
 import { useParams } from "react-router";
 import Article from "../interface/Article.interface";
-
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -22,13 +21,7 @@ const useStyles = makeStyles(theme => ({
       alignItems: 'center',
       color:'#d81b60',
   },
-  // textField: {
-  //     display: 'flex',
-  //     flexDirection: 'column',
-  //     marginBottom: theme.spacing(8),
-  //     width:1000,
-  //     backgroundColor:'#f48fb1',
-  // },
+  
   titre: {
       display: 'flex',
       position: "relative",
@@ -37,13 +30,7 @@ const useStyles = makeStyles(theme => ({
       color:'#d81b60',
       fontSize:72,
   },
-  button: {
-      marginBottom: theme.spacing(5),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      color:'#d81b60',
-  },
+  
   buttonun: {
       marginBottom: theme.spacing(5),
       display: 'flex',
@@ -52,8 +39,11 @@ const useStyles = makeStyles(theme => ({
       color:'#f48fb1',
       backgroundColor:'#d81b60'
   },
-  input: {
-      display: 'none',
+  inputimg: {
+     display: 'none', 
+  },
+  input:{
+    backgroundColor:'#d81b60'
   },
 
   blur: {
@@ -66,19 +56,19 @@ const useStyles = makeStyles(theme => ({
   },
   formu:{
       position: "relative", 
-      // top:"-545px",
       overflow:"hidden",
       marginLeft:"65%"
   },
   pic:{
-    height:"120px"
+    height:"0px"
+  },
+  label:{
+  fontSize:20,
   }
 })
 );
 
 const MajArticles = () => {
-  // const [hasError, setErrors] = useState(false);
-  
   const [articles, setArticles] = useState<Article>({
     id:'',
     title: '',
@@ -86,17 +76,14 @@ const MajArticles = () => {
     auteur:'',
     pic:''
   });
-  
-  const classes = useStyles();
 
+  const classes = useStyles();
   const paramUrl: any = useParams();
-  // const  myHeaders = new Headers();
 
   async function MajData() {
     return fetch("http://127.0.0.1:3000/articles/"+`${paramUrl.id}`,
       {
         method: "GET",
-        // headers: myHeaders,
         cache: "default"
       })
   }
@@ -121,8 +108,8 @@ const MajArticles = () => {
           'Access-Control-Allow-Origin': '*'
         },
         body: JSON.stringify(articles),
-        // cache: "default"
       })
+
     }
 
   return (
@@ -132,9 +119,14 @@ const MajArticles = () => {
             <form className={classes.form} noValidate autoComplete ="off" method="PATCH">
               <div className={classes.formu}>
 
-                <input type="text" id="id" name="id" value={articles.id} readOnly/>
+                <div>
+                <label className={classes.label} htmlFor="">Identifiant : </label>
+                <input className={classes.input} type="text" id="id" name="id" value={articles.id} readOnly/>
+                </div>
 
-                <input type="text" id="title" name="title" value={articles.title} placeholder="titre de l'article"
+                <div>
+                <label className={classes.label} htmlFor="">titre de l'article : </label>
+                <input className={classes.input} type="text" id="title" name="title" value={articles.title} placeholder="titre de l'article"
                   onChange={
                     (event) => {
                       articles.title =(event.currentTarget.value)
@@ -142,8 +134,11 @@ const MajArticles = () => {
                     }
                           }
                 />
+                </div>
 
-                <input type="text" id="content" name="content" placeholder="contenu de l'article" value={articles.content}
+                <div>
+                <label className={classes.label} htmlFor="">votre article : </label>
+                <input className={classes.input} type="text" id="content" name="content" placeholder="contenu de l'article" value={articles.content}
                 onChange={
                   (event) => {
                     articles.content =(event.currentTarget.value)
@@ -151,30 +146,45 @@ const MajArticles = () => {
                   }
                         }
                 />
+                </div>
+                <div>
+                <label className={classes.label} htmlFor="">auteur de l'article : </label>
+                <input className={classes.input} type="text" id="auteur" name="auteur" placeholder="auteur de l'article" value={articles.auteur}
+                onChange={
+                  (event) => {
+                    articles.auteur =(event.currentTarget.value)
+                    setArticles({...articles});
+                  }
+                        }
+                />
+                </div>
 
+                <div>
+                <label className={classes.label} htmlFor="">votre image : </label>
                 <img className={classes.pic} src= {`${articles.pic}`} alt=" "/>
                 <input
                       accept="image/*"
-                      className={classes.input}
+                      className={classes.inputimg}
                       id="contained-button-file"
                       multiple
                       type="file"
                 />
-    
+                </div>
+
                 <label htmlFor="contained-button-file">
                     <Button variant="contained" color="secondary" component="span" className={classes.buttonun}>
                      Télecharger votre image
                     </Button>
                 </label>
-                    <Button onClick={() => {Submit()}}>
+                    <Button className={classes.buttonun} onClick={() => {Submit()}}>
                      Envoyer
                     </Button>
-              </div>
+                </div>
             </form>
         </div>
     </Container>
   );
-}
 
+}
 
 export default MajArticles;

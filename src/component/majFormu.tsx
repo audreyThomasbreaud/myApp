@@ -77,37 +77,10 @@ const useStyles = makeStyles(theme => ({
   );
 
 const MajFormu = () => {
-    const [hasError, setErrors] = useState(false);
-    const [articles, setArticles] = useState<Article>();
-    const classes = useStyles();
-  
-    let { id } = useParams();
-  
-  async function UpDateData() {
-    return fetch("http://127.0.0.1:3000/articles/"+`${id}`,
-      {
-        method: "PATCH",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type':'application/json'
-        },
-        body: JSON.stringify({
-          
-        }),
-        cache: "default"
-      })
-  }
-  // useEffect(() => {
-  //   UpDateData()
-  //     .then(res => res.json())
-  //     .then((res) => {
-  //       console.log(res);
-  //       setArticles(res);
-  //     });
-  // }, []);
+   
 
   return(
-    <h1 className={classes.titre}> VOTRE ARTICLE EST MIS A JOUR </h1>
+    <h1> VOTRE ARTICLE EST MIS A JOUR </h1>
   )
 };
 
