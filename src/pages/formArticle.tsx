@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Princessee from '../pics/Princessee.png';
-import { TextField } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+import { useParams } from 'react-router';
+import { Container, Button } from '@material-ui/core';
+import Article from '../interface/Article.interface';
+
 
 
 
@@ -23,29 +24,16 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         color:'#d81b60',
     },
-    textField: {
-        display: 'flex',
-        flexDirection: 'column',
-        marginBottom: theme.spacing(8),
-        width:1000,
-        backgroundColor:'#f48fb1',
-    },
+    
     titre: {
         display: 'flex',
-        position: "relative", 
+        position: "relative",
         marginBottom: theme.spacing(8),
         marginTop: theme.spacing(15),
         color:'#d81b60',
         fontSize:72,
+    },
     
-    },
-    button: {
-        marginBottom: theme.spacing(5),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        color:'#d81b60',
-    },
     buttonun: {
         marginBottom: theme.spacing(5),
         display: 'flex',
@@ -54,10 +42,13 @@ const useStyles = makeStyles(theme => ({
         color:'#f48fb1',
         backgroundColor:'#d81b60'
     },
-    input: {
-        display: 'none',
+    inputimg: {
+       display: 'none', 
     },
-
+    input:{
+      backgroundColor:'#d81b60'
+    },
+  
     blur: {
         height:"550px",
         width:"1100px",
@@ -68,115 +59,130 @@ const useStyles = makeStyles(theme => ({
     },
     formu:{
         position: "relative", 
-        top:"-545px",
         overflow:"hidden",
         marginLeft:"65%"
     },
-})
-);
+    textarea:{
+      row:'25px',
+      cols:'45px'
+    },
+    pic:{
+      height:"0px"
+    },
+    label:{
+    fontSize:20,
+    }
+  })
+  );
 
 const FormArticle = () => {
     // const [hasError, setErrors] = useState(false);
-    const [setArticles] = useState([]);
+    const classes = useStyles();
+
+    const paramUrl: any = useParams();
+    const [articles, setArticles] = useState<Article>({
+        id:'',
+        title: '',
+        content:'',
+        auteur:'',
+        pic:''
+      });
 
 
-async function FormArticle() {
-    return fetch (`http://127.0.0.1:3000/articles/id`,
-    {
-        method: 'POST',
-        cache: 'default',
-    })
-  }
+    async function Submit() {
+        return fetch("http://127.0.0.1:3000/articles/",
+          {
+            method: "POST",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify(articles),
+          })
+        }
 
-//   useEffect(() => {
-//     FormArticle()
-// .then(res => res.json())
-// .then((res) => {
-//    console.log(res)
-//   setArticles(res);
-//     });
-//   }, []);
+      return (
+        <Container component="main" maxWidth="xl">
+            <h1 className={classes.titre}>CREER VOTRE ARTICLE : </h1>
+            <div>
+                <form className={classes.form} noValidate autoComplete ="off" method="PATCH">
+                  <div className={classes.formu}>
 
+                    <div>
+                    <label className={classes.label} htmlFor="">Identifiant : </label>
+                    <input className={classes.input} type="text" id="id" name="id" readOnly/>
+                    </div>
 
+                    <div>
+                    <label className={classes.label} htmlFor="">titre de l'article : </label>
+                    <input className={classes.input} type="text" id="title" name="title" placeholder="titre de l'article"
+                      onChange={
+                        (event) => {
+                          articles.title =(event.currentTarget.value)
+                          setArticles({...articles});
+                        }
+                      }
+                    />
+                    </div>
 
-
-
-
-
-
-
-
-  const classes = useStyles();
-return (
-    <p>le</p>
-    // <Container component="main" maxWidth="xl">
-    //     <h1 className={classes.titre}>CREER UN ARTICLE : </h1>
-
-    //     <div className={classes.blur}>
-    //     </div>
-    //     <div>
-    //     <form className={classes.form} noValidate autoComplete ="off" method="POST" action="">
-    //        <div className={classes.formu}>
-
-    //        <TextField
-    //                 id="outlined-required"
-    //                 label="identifiant :"
-    //                 className={classes.textField}
-    //                 margin="normal"
-    //                 variant="outlined"
-    //                 color="secondary"
-    //                 InputProps={{
-    //                     readOnly: true,
-    //                   }}
-    //             />
-
-    //             <TextField
-    //                 id="outlined-required"
-    //                 label="titre de l'article :"
-    //                 className={classes.textField}
-    //                 margin="normal"
-    //                 variant="outlined"
-    //                 color="secondary"
-    //                 // InputLabelProps={{articles.content}}
-    //             />
-    //             <TextField
-    //                 id="outlined-required"
-    //                 label="auteur de l'article:"
-    //                 className={classes.textField}
-    //                 margin="normal"
-    //                 variant="outlined"
-    //                 color="secondary"
-    //             />
-    //              <TextField
-    //                  id="outlined-multiline-static"
-    //                  label="Votre article: "
-    //                  multiline
-    //                  rows="4"
-    //                  className={classes.textField}
-    //                  margin="normal"
-    //                  variant="outlined"
-    //                  color="secondary"
-    //             />
-    //             <input
-    //                 accept="image/*"
-    //                 className={classes.input}
-    //                 id="contained-button-file"
-    //                 multiple
-    //                 type="file"
-    //             />
-    //             <label htmlFor="contained-button-file">
-    //              <Button variant="contained" color="secondary" component="span" className={classes.buttonun}>
-    //              Télecharger votre image
-    //             </Button>
-    //   </label>
-    //             <Button type="submit" variant="contained" href="#contained-buttons" className={classes.button}>
-    //                 Envoyer
-    //             </Button>
-    //         </div>
-    //     </form>
-    //     </div>
-    // </Container>
-) 
-}
+                    <div>
+                    <label className={classes.label} htmlFor="">votre article : </label>
+                    <textarea className={classes.textarea} id="content" name="content" placeholder="contenu de l'article" value={articles.content}
+                    onChange={
+                      (event) => {
+                        articles.content =(event.currentTarget.value)
+                        setArticles({...articles});
+                      }
+                            }
+                    ></textarea>
+                    {/* <input className={classes.input} type="text" id="content" name="content" placeholder="contenu de l'article" value={articles.content}
+                    onChange={
+                      (event) => {
+                        articles.content =(event.currentTarget.value)
+                        setArticles({...articles});
+                      }
+                            }
+                    /> */}
+                    </div>
+                    <div>
+                    <label className={classes.label} htmlFor="">auteur de l'article : </label>
+                    <input className={classes.input} type="text" id="auteur" name="auteur" placeholder="auteur de l'article" value={articles.auteur}
+                    onChange={
+                      (event) => {
+                        articles.auteur =(event.currentTarget.value)
+                        setArticles({...articles});
+                      }
+                            }
+                    />
+                    </div>
+    
+                    <div>
+                    <label className={classes.label} htmlFor="">votre image : </label>
+                    <img className={classes.pic} src= {`${articles.pic}`} alt=" "/>
+                    <input
+                          accept="image/*"
+                          className={classes.inputimg}
+                          id="contained-button-file"
+                          multiple
+                          type="file"
+                    />
+                    </div>
+    
+                    <label htmlFor="contained-button-file">
+                        <Button variant="contained" color="secondary" component="span" className={classes.buttonun}>
+                         Télecharger votre image
+                        </Button>
+                    </label>
+                        <Button className={classes.buttonun} onClick={() => {Submit()}}>
+                         Envoyer
+                        </Button>
+                    </div>
+                </form>
+            </div>
+        </Container>
+      );
+    
+    }
 
 export default FormArticle;

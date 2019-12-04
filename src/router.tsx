@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import AfficherListe from './pages/AfficherListe';
 import FrontUser from './pages/frontuser';
 import MajArticles from './component/majArticle';
+import DeleteArticle from './component/deleteArticle';
 // import DeleteArticles from './component/delete';
 
 
@@ -82,8 +83,8 @@ const Router: React.FC=() => {
                 <Route exact path="/FrontUser">
                   <FrontUser/>
                 </Route>
-                <Route exact path="/DeleteArticles">
-                    {/* <DeleteArticles/> */}
+                <Route  path="/DeleteArticle/:id">
+                    <DeleteArticle/>
                 </Route>
                 <Route path="/MajArticle/:id">
                     <MajArticles/>

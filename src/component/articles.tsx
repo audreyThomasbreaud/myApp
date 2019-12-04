@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import UpdateIcon from '@material-ui/icons/Update';
+import { useParams } from 'react-router';
 
 const useStyles = makeStyles(theme => ({
 
@@ -11,8 +12,9 @@ const useStyles = makeStyles(theme => ({
     marginRight:'4em',
     width:'15em'
   },
-
-
+  title:{
+    color: '#d81b60',
+  },
 button: {
   color: '#f48fb1',
   backgroundColor: '#d81b60',
@@ -36,6 +38,9 @@ alignItems:'center',
 alignContent:'center',
 marginLeft:'5em',
 },
+id:{
+display:'none',
+},
 
 article:{
   width:'50em',
@@ -49,6 +54,7 @@ const Articles = () => {
   const [hasError] = useState(false);
   const [articles, setArticles] = useState([]);
   const classes = useStyles();
+  const paramUrl: any = useParams();
 
   async function fetchData() {
     return fetch (`http://127.0.0.1:3000/articles`,
@@ -67,14 +73,28 @@ const Articles = () => {
     });
   }, []);
 
+ 
+    // async function Delete() {
+    // return fetch("http://127.0.0.1:3000/articles/"+`${paramUrl.id}`,
+    //   {
+    //     method: "DELETE",
+    //     headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json',
+    //     'Access-Control-Allow-Origin': '*'
+    //     },
+    //   })
+    // }
+
   return (
     <div>
       {articles &&
       articles.map((article: any) => (
         <div className={classes.parent} key={article.id}>
+          <div className={classes.id}>{article.id} </div>
           <img className={classes.pic} src={article.pic} alt=" "></img>
             <div>
-            <h1>{article.title}</h1>
+            <h1 className={classes.title}>{article.title}</h1>
             <p className={classes.article}>{article.content}</p>
             <p>{article.auteur}</p>
             </div>
@@ -93,8 +113,11 @@ const Articles = () => {
               color="secondary"
               className={classes.button}
               startIcon={<DeleteIcon />}
-              href='/deleteArticle'> Supprimer
-                </Button>
+               value={article.id}
+               href= {"/deleteArticle/"+article.id}
+              //  onClick={() => {Delete()}}
+              > Supprimer
+              </Button>
             </div>
         </div>
       ))}
