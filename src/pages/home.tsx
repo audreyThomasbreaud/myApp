@@ -11,17 +11,12 @@ const useStyles = makeStyles(theme => ({
             backgroundPosition: "center center",
             backgroundSize: "cover",
             backgroundAttachment: "fixed",
+            width:'100%',
+            height:'100%'
           },
       },
 
-          titre: {
-            // color: '#f48fb1',
-            // fontSize:86,
-            // display: 'flex',
-            // flexDirection: 'column',
-            // alignItems: 'flex-start',
-            // marginTop: theme.spacing(15),
-            // marginLeft: theme.spacing(10),
+          titreHome: {
           }
   }));
 
@@ -30,7 +25,7 @@ export default function Home() {
 
   return (
     <Container maxWidth="xl">
-        <h1 className={classes.titre}>BIENVENUE</h1>
+        <h1 className={classes.titreHome}>BIENVENUE</h1>
         <SimpleFade/>
     </Container>
 );

@@ -17,23 +17,21 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(1),
     },
     p:{
-        color: '#f48fb1',
-            fontSize:86,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
+      color: '#f48fb1',
+      fontSize:86,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
     },
     p2:{
-        color: '#d81b60',
-            fontSize:86,
-            display: 'flex',
-            flexDirection: 'column',
-            // alignItems: 'flex-end',
+      color: '#d81b60',
+      fontSize:86,
+      display: 'flex',
+      flexDirection: 'column',
     },
     p3:{
-        width:'25px'
+      width:'25px'
     }
-   
   }),
 );
 
@@ -53,7 +51,7 @@ export default function SimpleFade() {
       />
         <div className={classes.container}>
             <Zoom in={checked}>
-                <p className={classes.p}>BIEN</p> 
+                <p className={classes.p}>BIEN</p>
             </Zoom>
             <Zoom in={checked} style={{ transitionDelay: checked ? '500ms' : '0ms' }}>
                 <p className={classes.p}>VENUE </p>
@@ -64,9 +62,6 @@ export default function SimpleFade() {
             <Zoom in={checked} style={{ transitionDelay: checked ? '1000ms' : '0ms' }}>
                 <p className={classes.p2}>SUR CE BLOG</p>
             </Zoom>
-            {/* <Zoom in={checked} style={{ transitionDelay: checked ? '1000ms' : '0ms' }}>
-               <p>lalal<img src="../pics/coeur.jpg" alt=""/></p>
-            </Zoom> */}
         </div>
     </div>
   );

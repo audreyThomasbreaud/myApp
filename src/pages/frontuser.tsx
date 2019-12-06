@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Princessee from '../pics/Princessee.png';
 import ArticlesUser from '../component/listUser';
+import { Grid } from '@material-ui/core';
 
 
 
@@ -17,18 +17,20 @@ const useStyles = makeStyles(theme => ({
         },
       },
 
-        titre: {
-          color:'#d81b60',
-          fontSize:62,
-          marginTop: theme.spacing(15),
-          position:'relative',
-          // marginLeft:'25%',
-      },
+      titre: {
+        // display: 'flex',
+        // position: "relative",
+        // marginBottom: theme.spacing(8),
+        marginTop: theme.spacing(15),
+        color:'#d81b60',
+        fontSize:72,
+        textAlign:'center'
+    },
 
       contenu:{
-        color:'#212121',
-        position:'relative',
-        marginLeft:'25%',
+        // color:'#212121',
+        // position:'relative',
+        // marginLeft:'25%',
         
       }
 
@@ -39,12 +41,14 @@ export default function FrontUser() {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xl">
+     <Grid container spacing={2}>>
       <div  className={classes.contenu}>
-        <h1 className={classes.titre}>BIENVENUE SUR CE BLOG:</h1>
+      <Grid item xs={12}>
+            <h1 className={classes.titre}>BIENVENUE SUR CE BLOG</h1>
+            </Grid>
         <div><ArticlesUser/></div>
       </div>
-    </Container>
+    </Grid>
 );}
 
 

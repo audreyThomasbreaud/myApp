@@ -1,35 +1,55 @@
 import React, { useState,useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@material-ui/core/Button';
+import UpdateIcon from '@material-ui/icons/Update';
 
 const useStyles = makeStyles(theme => ({
-pic: {
-  height:'15em',
-  marginRight:'1em',
-  width:'15em'
-},
-
+  '@global': {
+    body: {
+      backgroundPosition: "center center",
+      backgroundSize: "cover",
+      backgroundAttachment: "fixed",
+      position: "absolute",
+      width: "100%",
+      height: "100%"
+   },
+  },
+  pic: {
+    height:'15em',
+   alignItems:'center',
+    width:'15em'
+  },
+  title:{
+    color: '#d81b60',
+  },
 parent:{
-  display: 'flex',
-  alignItems:'center',
-  alignContent:'center'
+  // display: 'flex',
+  // width:'100%',
+  // marginBottom:'2%',
+  // alignItems:'center',
+  // alignContent:'center'
 },
-
-artitre:{
-  width:'50em',
-  color:'#d81b60',
-  alignItems:'center'
+id:{
+display:'none',
 },
-
-container:{
-  alignItems:'center',
-
-},
-
 article:{
-  width:'50em',
-  color:'#212121',
-  alignItems:'center'
+  // width:'50em',
+  // color:'black',
+  // alignItems:'center'
+}, 
+root:{
+
+},
+titre: {
+  marginTop: theme.spacing(15),
+  color:'#d81b60',
+  fontSize:72,
+  textAlign:'center'
+},
+auteur:{
+  color: '#d81b60'
 }
 }));
 
@@ -58,22 +78,38 @@ const ArticlesUser = () => {
   }, []);
 
   return (
-    <Container component="main" maxWidth="xl" className={classes.container}>
     <div>
       {articles &&
       articles.map((article: any) => (
         <div className={classes.parent} key={article.id}>
-          <img className={classes.pic} src={article.pic} alt="pic"></img>
-            <div>
-            <h1 className={classes.artitre}>{article.title}</h1>
-            <p className={classes.article}>{article.content}</p>
-            <p>{article.auteur}</p>
-            </div>
+          <div className={classes.root}>
+            <Grid container spacing={2}>
+            
+              <Grid item xs={12}>
+              <div className={classes.id}>{article.id} </div>
+              </Grid>
+              <Grid item xs={4} 
+              container 
+              direction="row"
+              justify="center"
+              alignItems="center">
+              <img className={classes.pic} src={article.pic} alt=" "></img>
+              </Grid>
+              <Grid item xs={6}
+              container 
+              direction="row"
+              justify="center"
+              alignItems="center">
+              <h1 className={classes.title}>{article.title}</h1>
+              <p className={classes.article}>{article.content}</p>
+              <p className={classes.auteur}>{article.auteur}</p>
+              </Grid>
+            </Grid>
+          </div>
         </div>
       ))}
       {hasError && <span> Has error: {hasError}</span>}
     </div>
-    </Container>
   );
 };
 
